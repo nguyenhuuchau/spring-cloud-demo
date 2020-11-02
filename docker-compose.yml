@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  eureka:
+    environment:
+      - PROFILE=default
+    build: ./SpringCloudServiceRegistrationEurekaServer
+    ports:
+      - '9000:9000'
+  eureka-vn:
+    environment:
+      - PROFILE=vietnam
+      - EUREKA_REPLICA=http://eureka-us:9002/eureka
+    build: ./SpringCloudServiceRegistrationEurekaServer
+    ports:
+      - '9001:9001'
+    depends_on:
+      - eureka
+  eureka-us:
+    environment:
+      - PROFILE=united-states
+      - EUREKA_REPLICA=http://eureka-vn:9001/eureka
+    build: ./SpringCloudServiceRegistrationEurekaServer
+    ports:
+      - '9002:9002'
+    depends_on:
+      - eureka
+  clien0:
+    build: ./SpringCloudDiscoveryEurekaClient
+    ports:
+      - '8000:8000'
+    depends_on:
+      - eureka-vn
+    environment:
+      - PROFILE=default
+      - EUREKA_URI=http://eureka-vn:9001/eureka
+  clien1:
+    build: ./SpringCloudDiscoveryEurekaClient
+    ports:
+      - '8001:8001'
+    depends_on:
+      - eureka-vn
+    environment:
+      - PROFILE=abc-service-replica02
+      - EUREKA_URI=http://eureka-vn:9001/eureka
+  zuul:
+    build: ./SpringCloudZuulExample
+    ports:
+      - '9981:9981'
+    depends_on:
+      - eureka-vn
+    environment:
+      - EUREKA_URI=http://eureka-vn:9001/eureka
