@@ -6,10 +6,11 @@ spring:
       name: configserver
       server:
         git:
-          uri: https://github.com/nguyenhuuchau/spring-cloud-config-example
+          uri: https://github.com/nguyenhuuchau/spring-cloud-demo
 #          uri: https://github.com/spring-cloud-samples/config-repo
 #          uri: https://github.com/o7planning/spring-cloud-config-git-repo-example
           default-label: master
+          search-paths: config
       label: master
 logging:
   level:

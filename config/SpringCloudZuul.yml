@@ -1,0 +1,20 @@
+server:
+  port: 9981
+spring:
+  application:
+    name: gateway-service
+eureka:
+  instance:
+    appname: ZUUL-GATEWAY-SERVICE
+  client:
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:9001/eureka}
+
+zuul:
+  ignored-services: "*"
+  routes:
+    ABC-SERVICE:
+      path: /abc/**
+      service-id: ABC-SERVICE
+
