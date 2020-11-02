@@ -1,44 +1,8 @@
 ---
 #Default profile
 spring:
-  profiles: default
-server:
-  port: 9000
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
----
-spring:
-  profiles: vietnam
   application:
     name: eureka-server-clustered
-server:
-  port: 9001
-eureka:
-  instance:
-    hostname: eureka-vn
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${EUREKA_REPLICA:http://localhost:9002/eureka}
----
-spring:
-  profiles: united-states
-  application:
-    name: eureka-server-clustered
-server:
-  port: 9002
-eureka:
-  instance:
-    hostname: eureka-us
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${EUREKA_REPLICA:http://localhost.com:9001/eureka}
+  cloud:
+    config:
+      uri: http://localhost:5000
