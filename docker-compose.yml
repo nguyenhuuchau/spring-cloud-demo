@@ -16,6 +16,8 @@ services:
       - '9000:9000'
     depends_on:
       - config
+    links:
+      - config
   eureka-vn:
     environment:
       - PROFILE=vietnam
@@ -27,6 +29,8 @@ services:
     depends_on:
       - config
       - eureka
+    links:
+      - config
   eureka-us:
     environment:
       - PROFILE=united-states
@@ -38,6 +42,8 @@ services:
     depends_on:
       - config
       - eureka
+    links:
+      - config
   clien0:
     build: ./SpringCloudDiscoveryEurekaClient
     ports:
@@ -49,6 +55,9 @@ services:
       - CONFIG_SERVER=http://config:5000
       - PROFILE=default
       - EUREKA_URI=http://eureka-vn:9001/eureka
+    links:
+      - config
+      - eureka-vn
   clien1:
     build: ./SpringCloudDiscoveryEurekaClient
     ports:
@@ -60,6 +69,9 @@ services:
       - CONFIG_SERVER=http://config:5000
       - PROFILE=abc-service-replica02
       - EUREKA_URI=http://eureka-vn:9001/eureka
+    links:
+      - config
+      - eureka-vn
   zuul:
     build: ./SpringCloudZuul
     ports:
@@ -70,3 +82,6 @@ services:
     environment:
       - CONFIG_SERVER=http://config:5000
       - EUREKA_URI=http://eureka-vn:9001/eureka
+    links:
+      - config
+      - eureka-vn
