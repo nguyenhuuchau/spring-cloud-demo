@@ -3,4 +3,4 @@ spring:
     name: eureka-server-clustered
   cloud:
     config:
-      uri: http://localhost:5000
+      uri: ${CONFIG_SERVER:http://localhost:5000}

@@ -1,10 +1,10 @@
 spring:
   application:
-    name: ABC-SERVICE
+    name: test-service
 ---
 eureka:
   instance:
-    appname: ABC-SERVICE
+    appname: test-service
   client:
     fetchRegistry: true
     serviceUrl:
@@ -17,7 +17,7 @@ spring:
   profiles: abc-service-replica02
 eureka:
   instance:
-    appname: ABC-SERVICE  # ==> This is a instance of ABC-SERVICE
+    appname: test-service  # ==> This is a instance of ABC-SERVICE
   client:
     fetchRegistry: true
     serviceUrl:
@@ -30,7 +30,7 @@ spring:
   profiles: abc-service-replica03
 eureka:
   instance:
-    appname: ABC-SERVICE  # ==> This is a instance of ABC-SERVICE
+    appname: test-service  # ==> This is a instance of ABC-SERVICE
   client:
     fetchRegistry: true
     serviceUrl:
@@ -43,7 +43,7 @@ spring:
   profiles: abc-service-replica04
 eureka:
   instance:
-    appname: ABC-SERVICE  # ==> This is a instance of ABC-SERVICE
+    appname: test-service  # ==> This is a instance of ABC-SERVICE
   client:
     fetchRegistry: true
     serviceUrl:
@@ -56,7 +56,7 @@ spring:
   profiles: abc-service-replica05
 eureka:
   instance:
-    appname: ABC-SERVICE  # ==> This is a instance of ABC-SERVICE
+    appname: test-service  # ==> This is a instance of ABC-SERVICE
   client:
     fetchRegistry: true
     serviceUrl:

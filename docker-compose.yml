@@ -1,37 +1,52 @@
 version: '3'
 
 services:
+  config:
+    environment:
+      - PROFILE=default
+    build: ./SpringCloudConfigServer
+    ports:
+      - '5000:5000'
   eureka:
     environment:
+      - CONFIG_SERVER=http://config:5000
       - PROFILE=default
     build: ./SpringCloudServiceRegistrationEurekaServer
     ports:
       - '9000:9000'
+    depends_on:
+      - config
   eureka-vn:
     environment:
       - PROFILE=vietnam
       - EUREKA_REPLICA=http://eureka-us:9002/eureka
+      - CONFIG_SERVER=http://config:5000
     build: ./SpringCloudServiceRegistrationEurekaServer
     ports:
       - '9001:9001'
     depends_on:
+      - config
       - eureka
   eureka-us:
     environment:
       - PROFILE=united-states
       - EUREKA_REPLICA=http://eureka-vn:9001/eureka
+      - CONFIG_SERVER=http://config:5000
     build: ./SpringCloudServiceRegistrationEurekaServer
     ports:
       - '9002:9002'
     depends_on:
+      - config
       - eureka
   clien0:
     build: ./SpringCloudDiscoveryEurekaClient
     ports:
       - '8000:8000'
     depends_on:
+      - config
       - eureka-vn
     environment:
+      - CONFIG_SERVER=http://config:5000
       - PROFILE=default
       - EUREKA_URI=http://eureka-vn:9001/eureka
   clien1:
@@ -39,15 +54,19 @@ services:
     ports:
       - '8001:8001'
     depends_on:
+      - config
       - eureka-vn
     environment:
+      - CONFIG_SERVER=http://config:5000
       - PROFILE=abc-service-replica02
       - EUREKA_URI=http://eureka-vn:9001/eureka
   zuul:
-    build: ./SpringCloudZuulExample
+    build: ./SpringCloudZuul
     ports:
       - '9981:9981'
     depends_on:
+      - config
       - eureka-vn
     environment:
+      - CONFIG_SERVER=http://config:5000
       - EUREKA_URI=http://eureka-vn:9001/eureka

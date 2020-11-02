@@ -67,7 +67,7 @@ public class MainController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
 
-        return "<html>Hello from ABC-SERVICE</html>";
+        return "<html>Hello from TEST-SERVICE</html>";
     }
 
 }
