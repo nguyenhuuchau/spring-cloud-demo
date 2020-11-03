@@ -72,6 +72,17 @@ services:
     links:
       - config
       - eureka-vn
+  nodejs-client-1:
+    build: ./EurekaNodeJSClient
+    ports:
+      - '3003:3003'
+    depends_on:
+      - eureka-vn
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=eureka-vn
+      - HOSTNAME=nodejs-client-1
+    links:
+      - eureka-vn
   zuul:
     build: ./SpringCloudZuul
     ports:

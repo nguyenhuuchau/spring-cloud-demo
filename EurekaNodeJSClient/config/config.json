@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "12345678",
+    "database": "db_test",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "12345678",
+    "database": "db_angi",
+    "host": "192.168.0.51",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "12345678",
+    "database": "db_angi",
+    "host": "192.168.0.51",
+    "dialect": "mysql"
+  }
+}

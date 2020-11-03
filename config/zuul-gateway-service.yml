@@ -17,4 +17,7 @@ zuul:
     test-service:
       path: /test/**
       service-id: test-service
+    user-service:
+      path: /user/**
+      service-id: user-service
 
